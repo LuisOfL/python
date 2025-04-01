@@ -1,0 +1,25 @@
+def simpson_manual(func_str, a, b, n):
+    if n % 2 != 0:
+        raise ValueError("n debe ser par.")
+
+    # Creamos una función a partir del string
+    def f(x):
+        return eval(func_str)
+
+    h = (b - a) / n
+    x = [a + i * h for i in range(n + 1)]
+    y = [f(xi) for xi in x]
+
+    result = y[0] + y[-1]
+    result += 4 * sum(y[i] for i in range(1, n, 2))
+    result += 2 * sum(y[i] for i in range(2, n-1, 2))
+
+    return (h / 3) * result
+
+funcion = input("Ingresa la funcion")
+a = 0
+b = 4
+n = 10
+
+resultado = simpson_manual(funcion, a, b, n)
+print("Resultado aproximado:", resultado)
